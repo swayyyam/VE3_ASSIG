@@ -1,0 +1,65 @@
+{% extends "public_site/base.html" %}
+{% load static %}
+{% block main_content %}
+
+<!-- Carousel Start -->
+<div class="container-fluid p-0 wow fadeIn">
+    <div id="header-carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="w-100 bg-carousel-img" src="{% static 'public_site/img/white.jpeg' %}" alt="Image"
+                    style="height:95vh;">
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-2">
+                                <img src="{% static 'public_site/img/backlogo.png' %}" style="height: 200px;">
+                            </div>
+                            <div class="col-lg-7">
+                                <h1 class="display-4 mb-5 animated slideInDown">"Comprehensive Data Analysis from CSV
+                                    File for Informed Decision Making"</h1>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg-6">
+                                    <form method="post" enctype="multipart/form-data">
+                                        <h5 class="mx-1">Upload Your CSV File:</h5>
+                                        {% csrf_token %}
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="file" name="file" onchange="updateFileName()">
+                                                <label class="custom-file-label" for="file" id="file-label">Choose file</label>
+                                            </div>
+                                        </div>
+                                </div><br><br>
+                                <div class="col col-lg-2"><br>
+                                    <button class="btn btn-primary ripple m-1 mt-2" type="submit">Get Data</button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <p>Note: Upload Only CSV File</p>
+                   </div>
+                
+
+            </div>
+
+        </div>
+    </div>
+    
+<script>
+    function updateFileName() {
+        var input = document.getElementById('file');
+        var label = document.getElementById('file-label');
+        var fileName = input.files[0].name;
+        label.innerText = fileName;
+    }
+</script>
+    {% endblock %}

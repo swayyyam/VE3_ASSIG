@@ -1,0 +1,122 @@
+{% extends "public_site/base.html" %}
+{% load static %}
+{% block main_content %}
+
+    
+    <div class="container-fluid bg-light bg-icon pb-5">
+        <br><br><br><br>
+        <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s"
+                style="max-width: 500px;">
+                <h1 class="display-5 mb-3">CSV Analysis</h1>
+                <p>"Effortlessly analyze your CSV data with our comprehensive tool. Visualize trends, identify patterns, and gain insights to make data-driven decisions quickly and accurately."</p>
+            </div>
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-5 wow fadeIn order-md-2" data-wow-delay="0.1s">
+                    <h1 class="display-5 mb-4">First Few Rows Of Data</h1>
+                    <!-- <p class="mb-4 ">Step 2: Create an Account</p> -->
+                    <p><i class="fa fa-check text-primary me-3"></i>"Preview of the first few rows of CSV data showing key details, including headers and initial entries for a quick overview and analysis."</p>
+                   
+                </div>
+                <div class="col-lg-7 wow fadeIn order-md-1 " data-wow-delay="0.5s">
+                    <div class="position-relative overflow-hidden ml-5">
+                        {{ first_rows|safe }}
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row g-12">
+                <div class="col-lg-3 wow fadeIn order-md-2">
+                    <div class="position-relative overflow-hidden">
+                        <h3 class=" mb-4">Missing Values</h3>
+                        {{ missing_values|safe }}
+                    </div>
+                </div>
+                <div class="col-lg-3 wow fadeIn order-md-1">
+                    <div class="position-relative overflow-hidden">
+                        <h3 class=" mb-4">Mean Values</h3>
+                        {{ mean_values|safe }}
+                        
+                    </div>
+                </div>
+                <div class="col-lg-3 wow fadeIn" >
+                    <div class="position-relative overflow-hidden ms-0">
+                        <h3 class=" mb-4">Median Values</h3>
+                        {{ median_values|safe }}
+
+                    </div>
+                </div>
+                <div class="col-lg-3 wow fadeIn" >
+                    <div class="position-relative overflow-hidden ms-0">
+                        <h3 class=" mb-4">Standard Deviation</h3>
+                        {{ std_dev_values|safe }}
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    
+
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                    <h1 class="display-5 mb-4">Summary Statistics</h1>
+                    <!-- <p class="mb-4 ">Step 2: Create an Account</p> -->
+                    <p><i class="fa fa-check text-primary me-3"></i>"CSV Summary Statistics provides a concise overview of data, including mean, median, mode, standard deviation, and more. It aids in understanding the distribution and characteristics of the dataset at a glance."</p>
+                    
+                
+                </div>
+                <div class="col-lg-8 my-5 wow fadeIn" data-wow-delay="0.5s">
+                    
+                    <div class="position-relative overflow-hidden ms-0">
+                        {{ summary_stats|safe }}
+                    </div>
+                        <!-- <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="">Read More</a> -->
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+    
+    <!-- Our Teams Start -->
+    <div class="container-fluid bg-light bg-icon py-3 pb-5">
+        <div class="container">
+            <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s"
+                style="max-width: 500px;">
+                <h1 class="display-5 mb-3">Histograms</h1>
+                <p>"Visualizing CSV data with histograms for insightful data analysis, providing clear, graphical representations of data distribution and trends."</p>
+            </div>
+            <div class="row g-4">
+                {% for column, img_url in histograms.items %}
+                <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class=" text-center p-3"
+                        style="border-radius:20px;height:380px; border-color: #3CB815; border-width: 10px; border-style: solid;">
+                        <img class="img-fluid mb-1" src="{{ img_url }}" alt="Histogram of {{ column }}" style="border-radius:25px; height: 300px;">
+                        <h4>{{ column }}</h4>
+                    </div>
+                </div>  
+                {% endfor %} 
+
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <a href="{% url 'analysis:upload_csv' %}" class="btn btn-primary ripple m-1 mt-2" type="submit" style="display: inline-block;">Upload Another File</a>
+    </div>
+    
+
+    <!-- Our Teams End -->
+    {% endblock %}
